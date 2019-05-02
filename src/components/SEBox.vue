@@ -9,7 +9,6 @@
           <v-card-title class="font-weight-bold">{{name}}</v-card-title>
         </v-flex>
       </v-layout>
-      <div>メモ</div>
       <v-layout>
         <v-flex xs2>
           <v-btn @click="togglePlaying" small fab color="grey darken-2">

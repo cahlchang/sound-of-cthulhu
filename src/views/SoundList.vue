@@ -36,6 +36,7 @@
              @remove-sound="removeSE($event)"
             />
           </v-flex>
+          <v-icon @click="addSE" size='75'>playlist_add</v-icon>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -71,7 +72,8 @@ export default {
   methods: {
     saveSoundList () {
       const soundList = {
-        BGMs: this.bgmFiles
+        BGMs: this.bgmFiles,
+        SEs: this.seFiles
       }
       storage.set(this.soundListName, soundList, (error) => {
         if (error) {
@@ -92,7 +94,9 @@ export default {
           this.showSnackbar('No sound list', 'error')
           return
         }
-        this.bgmFiles = data.BGMs
+        // if BGM or SE are empty, set sample sounds
+        if (data.BGMs.length !== 0) { this.bgmFiles = data.BGMs }
+        if (data.SEs.length !== 0) { this.seFiles = data.SEs }
       })
     },
     addBGM () {
@@ -107,6 +111,24 @@ export default {
       dialog.showOpenDialog(window, options,
         (filenames) => {
           this.bgmFiles.push(filenames[0])
+        }
+      )
+    },
+    addSE () {
+      this.addSound(this.seFiles)
+    },
+    addSound (trgFiles) {
+      let window = remote.getCurrentWindow()
+      let options = {
+        title: 'File open',
+        filters: [
+          { name: 'sound', extensions: ['mp3'] }
+        ],
+        properties: ['openFile']
+      }
+      dialog.showOpenDialog(window, options,
+        (filenames) => {
+          trgFiles.push(filenames[0])
         }
       )
     },
