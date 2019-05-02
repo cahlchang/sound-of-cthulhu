@@ -30,8 +30,11 @@
       </v-flex>
       <v-flex xs2>
         <v-layout wrap>
-          <v-flex xs12 pa-1 v-for="(name, index) in seNames" :key="index">
-            <SEBox :name="name"/>
+          <v-flex xs12 pa-1 v-for="(filepath, index) in seFiles" :key="index">
+            <SEBox
+             :filepath="filepath"
+             @remove-sound="removeSE($event)"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -114,6 +117,10 @@ export default {
       this.bgmFiles = this.bgmFiles.filter(filename => filename !== trgName)
       this.showSnackbar(`"${path.basename(trgName, '.mp3')}" is removed`, 'info')
     },
+    removeSE (trgName) {
+      this.seFiles = this.seFiles.filter(filename => filename !== trgName)
+      this.showSnackbar(`"${path.basename(trgName, '.mp3')}" is removed`, 'info')
+    },
     showSnackbar (text, color) {
       this.snackbarText = text
       this.snackbarColor = color
@@ -127,7 +134,7 @@ export default {
     return {
       soundListName: 'default',
       bgmFiles: ['public/bgm_sample.mp3', 'public/short_sample.mp3'],
-      seNames: ['bang', 'bomb'],
+      seFiles: ['public/bomb.mp3', 'public/keening_woman.mp3'],
       currentBGM: null,
       snackbar: false,
       snackbarText: '',
