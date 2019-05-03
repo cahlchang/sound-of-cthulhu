@@ -17,7 +17,7 @@
     <v-layout wrap>
       <v-flex xs10>
         <v-layout wrap>
-          <v-flex xs6 md4 pa-1 v-for="(filepath, index) in bgmFiles" :key="index">
+          <v-flex xs6 md4 pa-1 v-for="(filepath) in bgmFiles" :key="filepath">
             <BGMBox
              :filepath="filepath"
              :currentBGM="currentBGM"
@@ -30,7 +30,7 @@
       </v-flex>
       <v-flex xs2>
         <v-layout wrap>
-          <v-flex xs12 pa-1 v-for="(filepath, index) in seFiles" :key="index">
+          <v-flex xs12 pa-1 v-for="(filepath) in seFiles" :key="filepath">
             <SEBox
              :filepath="filepath"
              @remove-sound="removeSE($event)"
