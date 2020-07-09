@@ -26,6 +26,9 @@ jobs:
       - name: yarn install
         run: |
           yarn install
+      - name: make token files
+        run: |
+          echo ${{ secrets.DISCORD_TOKEN }} > src/discord_token.js
       - name: Publish
         run: |
           yarn electron:build
