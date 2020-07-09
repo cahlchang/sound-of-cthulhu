@@ -31,7 +31,7 @@ jobs:
           echo ${{ secrets.DISCORD_TOKEN }} > src/discord_token.js
       - name: Publish
         run: |
-          yarn electron:build
+          yarn dist
       - name: Cleanup artifacts
         run: |
           npx rimraf "dist/!(*.exe|*.deb|*.AppImage|*.dmg)"
