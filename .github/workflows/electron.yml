@@ -9,8 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        #os: [macOS-10.15, windows-2016, ubuntu-18.04]
-        os: [macOS-10.15, windows-2016]
+        os: [macOS-10.15, windows-2016, ubuntu-18.04]
  
     steps:
       - name: Context
@@ -49,19 +48,22 @@ jobs:
         run: yarn electron:build --linux
         env:
           USE_HARD_LINKS: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for macOS
         if: matrix.os == 'macOS-10.15'
         run: yarn electron:build --mac
         env:
           USE_HARD_LINKS: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
         run: yarn electron:build --win
         env:
           USE_HARD_LINKS: false
-  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Cleanup artifacts
         run: |
           npx rimraf "dist_electron/!(sound-of-cthulhu*.exe|sound-of-cthulhu-1.0.0-mac|*.AppImage|*.dmg)"
