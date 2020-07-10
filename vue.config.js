@@ -20,8 +20,7 @@ module.exports = {
 	linux: {	
 	  icon: "build/icon.icns",
 	  target: [
-            'deb',
-            'rpm'
+            'deb'
 	  ],
 	},
       },
