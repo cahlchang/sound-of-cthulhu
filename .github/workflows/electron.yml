@@ -64,7 +64,6 @@ jobs:
   
       - name: Cleanup artifacts
         run: |
-          ls -la
           npx rimraf "dist_electron/!(sound-of-cthulhu*.exe|sound-of-cthulhu-1.0.0-mac|*.AppImage|*.dmg)"
 
       - name: Build/release Electron app
