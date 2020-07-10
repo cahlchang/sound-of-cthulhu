@@ -13,6 +13,8 @@ jobs:
         os: [macOS-10.15, windows-2016]
  
     steps:
+      env:
+        USE_HARD_LINKS: false
       - name: Context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
