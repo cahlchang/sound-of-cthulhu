@@ -44,35 +44,29 @@ jobs:
         run: |
           echo ${{ secrets.DISCORD_TOKEN }} > src/discord_token.js
             
-      # - name: Build for linux
-      #   if: matrix.os == 'ubuntu-18.04'
-      #   run: yarn electron:build --linux
-      #   env:
-      #     USE_HARD_LINKS: false
+      - name: Build for linux
+        if: matrix.os == 'ubuntu-18.04'
+        run: yarn electron:build --linux
+        env:
+          USE_HARD_LINKS: false
 
-      # - name: Build for macOS
-      #   if: matrix.os == 'macOS-10.15'
-      #   run: yarn electron:build --mac
-      #   env:
-      #     USE_HARD_LINKS: false
+      - name: Build for macOS
+        if: matrix.os == 'macOS-10.15'
+        run: yarn electron:build --mac
+        env:
+          USE_HARD_LINKS: false
 
-      # - name: Build for Windows
-      #   if: matrix.os == 'windows-2016'
-      #   run: yarn electron:build --win
-      #   env:
-      #     USE_HARD_LINKS: false
+      - name: Build for Windows
+        if: matrix.os == 'windows-2016'
+        run: yarn electron:build --win
+        env:
+          USE_HARD_LINKS: false
 
-      - name: Cleanup artifacts
-        run: |
-          npx rimraf "dist_electron/!(sound-of-cthulhu*.exe|sound-of-cthulhu-1.0.0-mac|*.AppImage|*.dmg)"
-
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: dist_electron/sound-of-cthulhu*
+        tag: ${{ github.ref }}-test
+        overwrite: true
+        body: "Test Release"
