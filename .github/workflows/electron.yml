@@ -48,21 +48,18 @@ jobs:
         run: yarn electron:build --linux
         env:
           USE_HARD_LINKS: false
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for macOS
         if: matrix.os == 'macOS-10.15'
         run: yarn electron:build --mac
         env:
           USE_HARD_LINKS: false
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
         run: yarn electron:build --win
         env:
           USE_HARD_LINKS: false
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cleanup artifacts
         run: |
