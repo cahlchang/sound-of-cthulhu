@@ -37,8 +37,6 @@ jobs:
           node-version: v13.7.0
       - name: yarn install
         run: |
-          npm uninstall yarn
-          npm install yarn
           yarn install
           yarn postinstall
       - name: make token files
