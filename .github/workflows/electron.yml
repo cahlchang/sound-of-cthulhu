@@ -13,8 +13,6 @@ jobs:
         os: [macOS-10.15, windows-2016]
  
     steps:
-      env:
-        USE_HARD_LINKS: false
       - name: Context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -49,14 +47,20 @@ jobs:
       - name: Build for linux
         if: matrix.os == 'ubuntu-18.04'
         run: yarn electron:build --linux
+        env:
+          USE_HARD_LINKS: false
 
       - name: Build for macOS
         if: matrix.os == 'macOS-10.15'
         run: yarn electron:build --mac
-        
+        env:
+          USE_HARD_LINKS: false
+
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
         run: yarn electron:build --win
+        env:
+          USE_HARD_LINKS: false
   
       - name: Cleanup artifacts
         run: |
