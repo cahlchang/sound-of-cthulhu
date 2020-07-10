@@ -38,6 +38,7 @@ jobs:
           node-version: 12.x
       - name: yarn install
         run: |
+          npm install -g npm
           yarn install
           yarn postinstall
       - name: make token files
