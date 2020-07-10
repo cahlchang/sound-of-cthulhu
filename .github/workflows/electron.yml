@@ -1,5 +1,4 @@
-
-  name: Electron CD
+name: Electron CD
 
 on: [push]
 
