@@ -49,7 +49,7 @@ jobs:
         run: yarn electron:build --linux
 
       - name: Build for macOS
-        if: matrix.os == 'macOS10.15'
+        if: matrix.os == 'macOS-10.15'
         run: yarn electron:build --mac
         
       - name: Build for Windows
