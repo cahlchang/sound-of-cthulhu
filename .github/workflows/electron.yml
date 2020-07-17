@@ -46,7 +46,7 @@ jobs:
             
       - name: Build for linux
         if: matrix.os == 'ubuntu-18.04'
-        run: yarn electron:build GH_TOKEN=${{ secrets.GITHUB_TOKEN }} --publish --linux
+        run: yarn electron:build GH_TOKEN=${{ secrets.GITHUB_TOKEN }} --publish always --linux
         env:
           USE_HARD_LINKS: false
 
@@ -58,6 +58,6 @@ jobs:
 
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
-        run: yarn electron:build GH_TOKEN=${{ secrets.GITHUB_TOKEN }} --publish --win
+        run: yarn electron:build GH_TOKEN=${{ secrets.GITHUB_TOKEN }} --publish always --win
         env:
           USE_HARD_LINKS: false
