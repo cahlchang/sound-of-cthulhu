@@ -49,14 +49,12 @@ jobs:
         run: yarn electron:build --linux
         env:
           USE_HARD_LINKS: false
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Build for macOS
         if: matrix.os == 'macOS-10.15'
-        run: yarn electron:build --mac
+        run: yarn electron:build GH_TOKEN=${{ secrets.GH_TOKEN }} build -p always --mac
         env:
           USE_HARD_LINKS: false
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
