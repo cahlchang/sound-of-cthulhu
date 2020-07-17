@@ -46,21 +46,27 @@ jobs:
             
       - name: Build for linux
         if: matrix.os == 'ubuntu-18.04'
-        run: yarn electron:build --publish always --linux
+        run: yarn electron:build --publish never --linux
         env:
           USE_HARD_LINKS: false
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for macOS
         if: matrix.os == 'macOS-10.15'
-        run: yarn electron:build --publish always --mac
+        run: yarn electron:build --publish never --mac
         env:
           USE_HARD_LINKS: false
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build for Windows
         if: matrix.os == 'windows-2016'
-        run: yarn electron:build --publish always --win
+        run: yarn electron:build --publish never --win
         env:
           USE_HARD_LINKS: false
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: 'dist_electron/sound-of-cthulhu*'
+          tag_name: test-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+`
