@@ -17,6 +17,12 @@ module.exports = {
 	win: {
           target: 'portable'
 	},
+	linux: {	
+	  icon: "build/icon.icns",
+	  target: [
+            'deb'
+	  ],
+	},
       },
       externals: ['discord.js']
     }
